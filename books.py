@@ -14,6 +14,7 @@ def get_paragraphs(pathname: str) -> list:
 class BooksResource:
     def on_get(self, req, resp):
         resp.status = falcon.HTTP_200
+        resp.content_type = 'text/html'
         paragraphs = get_paragraphs('/home/sanchopanca/Documents/thunder.txt')
         resp.body = template.render_template('book.html', paragraphs=paragraphs)
 
