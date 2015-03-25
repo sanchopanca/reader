@@ -1,7 +1,8 @@
 import falcon
+import template
 
 
-def get_paragraphs(pathname):
+def get_paragraphs(pathname: str) -> list:
     result = []
     with open(pathname) as f:
         for line in f.readlines():
@@ -13,7 +14,8 @@ def get_paragraphs(pathname):
 class BooksResource:
     def on_get(self, req, resp):
         resp.status = falcon.HTTP_200
-        resp.body = open('/home/sanchopanca/Documents/thunder.txt').read()
+        paragraphs = get_paragraphs('/home/sanchopanca/Documents/thunder.txt')
+        resp.body = template.render_template('book.html', paragraphs=paragraphs)
 
 
 app = falcon.API()
