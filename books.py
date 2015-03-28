@@ -1,14 +1,7 @@
 import falcon
+
 import template
-
-
-def get_paragraphs(pathname: str) -> list:
-    result = []
-    with open(pathname) as f:
-        for line in f.readlines():
-            if line != '\n':
-                result.append(line[:-1])
-    return result
+from parser import get_paragraphs
 
 
 class BooksResource:
@@ -24,8 +17,3 @@ app = falcon.API()
 books = BooksResource()
 
 app.add_route('/books', books)
-
-
-if __name__ == '__main__':
-    paragraphs = get_paragraphs('/home/sanchopanca/Documents/thunder.txt')
-    print(paragraphs)
